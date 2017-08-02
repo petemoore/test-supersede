@@ -19,17 +19,17 @@ func main() {
 	}
 
 	taskIDs := []string{
-		"JVV_XYi-QFCBbmQ8v6m0ew",
-		"C-j4b1LERq-DFhd3uf-9-A",
-		"ARbfJul8QC6M2i8lZRtCeg",
-		"PXXbt0-9QmyeVLyPnmQ4Kg",
-		"NQArEEbqTDaTxkwqShM_DA",
+		"KxICrzH3Q8uaa8Aa9c482A",
+		"bw7oQG39TRuoiOKo5xYi3Q",
+		"I31qErMmRheOU1LrjOmdEg",
+		"DqusvYRUTaG4zENK_B9R0g",
+		"a0LRK4scS46PptELKxTP7Q",
 	}
 
 	for _, taskID := range taskIDs {
 		maxRunTime := 3600
 		// primary task should fail, to trigger abort
-		if taskID == "NQArEEbqTDaTxkwqShM_DA" {
+		if taskID == "a0LRK4scS46PptELKxTP7Q" {
 			maxRunTime = 10
 		}
 		created := time.Now()
@@ -61,10 +61,10 @@ func main() {
       "sleep",
       "60"
     ],
-	"supersederUrl": "https://gist.githubusercontent.com/petemoore/80f4ba8a8a47050a59e17a3c74a99432/raw/76d403f1533610911c26f88c8b27df78ae4314f1/supersede-test.txt"
+	"supersederUrl": "https://gist.githubusercontent.com/petemoore/80f4ba8a8a47050a59e17a3c74a99432/raw/23fd91c314938c029a2a8de937c1fd6a6ec5edfa/supersede-test.txt"
   }`),
 			ProvisionerID: "aws-provisioner-v1",
-			WorkerType:    "gecko-1-b-linux",
+			WorkerType:    "tutorial",
 		}
 		q := queue.New(creds)
 		log.Printf("Creating task %v...", taskID)
