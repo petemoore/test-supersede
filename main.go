@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	supersederURL = "https://gist.githubusercontent.com/petemoore/80f4ba8a8a47050a59e17a3c74a99432/raw/453f00daa7fc5e08bf68c379a3aa07fde611a3cf/supersede-test.txt"
+	supersederURL = "https://raw.githubusercontent.com/petemoore/test-supersede/master/supersedes.txt"
 )
 
 type Supersedes struct {
