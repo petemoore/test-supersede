@@ -18,7 +18,16 @@ EOF
 
 git add supersedes.txt
 git commit -m "Updates slugs in supersedes.txt"
-git push origin master
+git push
 sleep 2
+author="$(git log --pretty=format:%ae -1)"
+commit="$(git rev-parse HEAD)"
+giturl="$(git remote get-url origin)"
+githubrepo="$(echo "${giturl}" | sed -n 's/^git@github.com://p' | sed 's/\.git$//')"
 
-test-supersede "https://github.com/petemoore/test-supersede" "https://raw.githubusercontent.com/petemoore/test-supersede/$(git rev-parse HEAD)/supersedes.txt"
+if [ -n "${githubrepo}" ]; then
+  test-supersede "https://github.com/${githubrepo}" "https://raw.githubusercontent.com/${githubrepo}/${commit}/supersedes.txt" "${author}"
+else
+  echo "run.sh: Git remote doesn't seem to be a github repo: ${giturl}" > &2
+  exit 64
+fi

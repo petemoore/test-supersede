@@ -20,6 +20,7 @@ func main() {
 
 	sourceURL := os.Args[1]
 	supersederURL := os.Args[2]
+	owner := os.Args[3]
 
 	creds := &tcclient.Credentials{
 		ClientID:    os.Getenv("TASKCLUSTER_CLIENT_ID"),
@@ -60,7 +61,7 @@ func main() {
 			}{
 				Description: "supersedes test",
 				Name:        "supersedes test",
-				Owner:       "pmoore@mozilla.com",
+				Owner:       owner,
 				Source:      sourceURL,
 			},
 			Payload: json.RawMessage(`{
