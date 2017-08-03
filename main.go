@@ -58,8 +58,8 @@ func main() {
 				Owner       string `json:"owner"`
 				Source      string `json:"source"`
 			}{
-				Description: "supercedes test",
-				Name:        "supercedes test",
+				Description: "supersedes test",
+				Name:        "supersedes test",
 				Owner:       "pmoore@mozilla.com",
 				Source:      sourceURL,
 			},
