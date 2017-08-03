@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"log"
+	"net/http"
 	"os"
 	"strconv"
 	"time"
@@ -11,6 +12,14 @@ import (
 	"github.com/taskcluster/taskcluster-client-go/queue"
 )
 
+var (
+	supersederURL = "https://gist.githubusercontent.com/petemoore/80f4ba8a8a47050a59e17a3c74a99432/raw/453f00daa7fc5e08bf68c379a3aa07fde611a3cf/supersede-test.txt"
+)
+
+type Supersedes struct {
+	Supersedes []string `json:"supersedes"`
+}
+
 func main() {
 	creds := &tcclient.Credentials{
 		ClientID:    os.Getenv("TASKCLUSTER_CLIENT_ID"),
@@ -18,18 +27,22 @@ func main() {
 		Certificate: os.Getenv("TASKCLUSTER_CERTIFICATE"),
 	}
 
-	taskIDs := []string{
-		"JJvdwJ0QTwqEbaha5m1hWA",
-		"KQMpFx_eQlmTKjJrCVH3Vg",
-		"FlRPGwauSUyWO3B4hKDy4Q",
-		"L22xuCpAQyK9gmWVVcLNSg",
-		"ekkO4XChQhy89vxY4qUWGg",
+	resp, err := http.Get(supersederURL)
+	if err != nil {
+		panic(err)
 	}
+	decoder := json.NewDecoder(resp.Body)
+	var supersedes Supersedes
+	err = decoder.Decode(&supersedes)
+	if err != nil {
+		panic(err)
+	}
+	taskIDs := supersedes.Supersedes
 
 	for _, taskID := range taskIDs {
 		maxRunTime := 3600
 		// primary task should fail, to trigger abort
-		if taskID == "ekkO4XChQhy89vxY4qUWGg" {
+		if taskID == taskIDs[len(taskIDs)-1] {
 			maxRunTime = 10
 		}
 		created := time.Now()
@@ -61,7 +74,7 @@ func main() {
       "sleep",
       "60"
     ],
-	"supersederUrl": "https://gist.githubusercontent.com/petemoore/80f4ba8a8a47050a59e17a3c74a99432/raw/21cd1fef513a9a3f2d4cddbfd6bbdeebc2be4d32/supersede-test.txt"
+	"supersederUrl": "` + supersederURL + `"
   }`),
 			ProvisionerID: "aws-provisioner-v1",
 			WorkerType:    "tutorial",
