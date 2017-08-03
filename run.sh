@@ -28,6 +28,6 @@ githubrepo="$(echo "${giturl}" | sed -n 's/^git@github.com://p' | sed 's/\.git$/
 if [ -n "${githubrepo}" ]; then
   test-supersede "https://github.com/${githubrepo}" "https://raw.githubusercontent.com/${githubrepo}/${commit}/supersedes.txt" "${author}"
 else
-  echo "run.sh: Git remote doesn't seem to be a github repo: ${giturl}" > &2
+  echo "run.sh: Git remote doesn't seem to be a github repo: ${giturl}" >&2
   exit 64
 fi
