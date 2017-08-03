@@ -12,15 +12,14 @@ import (
 	"github.com/taskcluster/taskcluster-client-go/queue"
 )
 
-var (
-	supersederURL = "https://raw.githubusercontent.com/petemoore/test-supersede/master/supersedes.txt"
-)
-
 type Supersedes struct {
 	Supersedes []string `json:"supersedes"`
 }
 
 func main() {
+
+	supersederURL := os.Args[1]
+
 	creds := &tcclient.Credentials{
 		ClientID:    os.Getenv("TASKCLUSTER_CLIENT_ID"),
 		AccessToken: os.Getenv("TASKCLUSTER_ACCESS_TOKEN"),
