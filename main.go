@@ -18,7 +18,8 @@ type Supersedes struct {
 
 func main() {
 
-	supersederURL := os.Args[1]
+	sourceURL := os.Args[1]
+	supersederURL := os.Args[2]
 
 	creds := &tcclient.Credentials{
 		ClientID:    os.Getenv("TASKCLUSTER_CLIENT_ID"),
@@ -60,7 +61,7 @@ func main() {
 				Description: "supercedes test",
 				Name:        "supercedes test",
 				Owner:       "pmoore@mozilla.com",
-				Source:      "https://github.com/",
+				Source:      sourceURL,
 			},
 			Payload: json.RawMessage(`{
     "maxRunTime": ` + strconv.Itoa(maxRunTime) + `,

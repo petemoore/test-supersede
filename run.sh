@@ -21,4 +21,4 @@ git commit -m "Updates slugs in supersedes.txt"
 git push origin master
 sleep 2
 
-test-supersede "https://raw.githubusercontent.com/petemoore/test-supersede/$(git rev-parse HEAD)/supersedes.txt"
+test-supersede "https://github.com/petemoore/test-supersede" "https://raw.githubusercontent.com/petemoore/test-supersede/$(git rev-parse HEAD)/supersedes.txt"
