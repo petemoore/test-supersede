@@ -43,7 +43,7 @@ func main() {
 	for _, taskID := range taskIDs {
 		maxRunTime := 3600
 		// primary task should fail, to trigger abort
-		if taskID == taskIDs[len(taskIDs)-1] {
+		if taskID == taskIDs[0] {
 			maxRunTime = 10
 		}
 		created := time.Now()
