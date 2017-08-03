@@ -19,17 +19,17 @@ func main() {
 	}
 
 	taskIDs := []string{
-		"Wb9WW8nUTTKhd2lkH8yeLw",
-		"BYpgT70gSdmQSlahptyqPg",
-		"DNNF4jGZRDmYYasNWnS_Og",
-		"QznWlI1fTJml5M4yMqWcsw",
-		"EtVkQJlqT2ipsNYJ3lRbHQ",
+		"JJvdwJ0QTwqEbaha5m1hWA",
+		"KQMpFx_eQlmTKjJrCVH3Vg",
+		"FlRPGwauSUyWO3B4hKDy4Q",
+		"L22xuCpAQyK9gmWVVcLNSg",
+		"ekkO4XChQhy89vxY4qUWGg",
 	}
 
 	for _, taskID := range taskIDs {
 		maxRunTime := 3600
 		// primary task should fail, to trigger abort
-		if taskID == "EtVkQJlqT2ipsNYJ3lRbHQ" {
+		if taskID == "ekkO4XChQhy89vxY4qUWGg" {
 			maxRunTime = 10
 		}
 		created := time.Now()
@@ -61,7 +61,7 @@ func main() {
       "sleep",
       "60"
     ],
-	"supersederUrl": "https://gist.githubusercontent.com/petemoore/80f4ba8a8a47050a59e17a3c74a99432/raw/d3c15c9ec382b035c62bd8f7ed802c5f8d06c527/supersede-test.txt"
+	"supersederUrl": "https://gist.githubusercontent.com/petemoore/80f4ba8a8a47050a59e17a3c74a99432/raw/21cd1fef513a9a3f2d4cddbfd6bbdeebc2be4d32/supersede-test.txt"
   }`),
 			ProvisionerID: "aws-provisioner-v1",
 			WorkerType:    "tutorial",
