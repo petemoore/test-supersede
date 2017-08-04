@@ -23,7 +23,11 @@ sleep 2
 author="$(git log --pretty=format:%ae -1)"
 commit="$(git rev-parse HEAD)"
 giturl="$(git remote get-url origin)"
-githubrepo="$(echo "${giturl}" | sed -n 's/^git@github.com://p' | sed 's/\.git$//')"
+
+# allow either https or ssh repo url format:
+#   git@github.com:<user>/<repo>
+#   https://github.com/<user>/<repo>
+githubrepo="$(echo "${giturl}" | sed -e 's/^git@github.com:/@/' -e 's/^https:\/\/github.com\//@/' -e 's/\.git$//' | sed -n 's/^@//p')"
 
 if [ -n "${githubrepo}" ]; then
   test-supersede "https://github.com/${githubrepo}/tree/${commit}" "https://raw.githubusercontent.com/${githubrepo}/${commit}/supersedes.txt" "${author}"
